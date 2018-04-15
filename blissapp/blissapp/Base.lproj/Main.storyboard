@@ -99,6 +99,9 @@
                                     <constraint firstAttribute="height" constant="56" id="bbR-Ep-rZe"/>
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Mvj-PA-sJD" id="9Ub-aR-FHk"/>
+                                </connections>
                             </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -115,6 +118,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Questions" id="254-qT-ghp"/>
                     <connections>
+                        <outlet property="searchBar" destination="e3Z-Ue-08S" id="HRk-8e-bSv"/>
                         <outlet property="tableView" destination="Poi-I8-L8t" id="dyp-Hz-bBX"/>
                     </connections>
                 </viewController>

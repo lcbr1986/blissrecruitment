@@ -12,13 +12,12 @@ class QuestionListViewController: UIViewController {
     
     var questions: [Question] = [Question]()
     var currentOffset: Int = 0
-    var totalQuestions: Int = 0
     var imageCache:[String: UIImage] = [String: UIImage]()
     
     var filter = ""
     
     @IBOutlet weak var tableView: UITableView!
-    
+    @IBOutlet weak var searchBar: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +47,12 @@ class QuestionListViewController: UIViewController {
                 })
             }
         }
+    }
+    
+    func resetList() {
+        currentOffset = 0
+        questions = [Question]()
+        filter = ""
     }
     
     func showError(error: Error?) {
@@ -114,5 +119,17 @@ extension QuestionListViewController: UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+extension QuestionListViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        resetList()
+        guard let searchTerm = searchBar.text else {
+            return
+        }
+        self.filter = searchTerm
+        getQuestions()
     }
 }
