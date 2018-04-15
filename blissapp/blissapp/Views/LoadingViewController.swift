@@ -20,9 +20,9 @@ class LoadingViewController: UIViewController {
     }
     
     func getHealth() {
-        let networkManager = NetworkController()
+        let networkController = NetworkController()
         
-        networkManager.getHealth { (data, error) in
+        networkController.getHealth { (data, error) in
             guard let data = data else {
                 self.showRetry()
                 return
