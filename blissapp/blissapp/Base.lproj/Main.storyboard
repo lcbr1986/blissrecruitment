@@ -50,7 +50,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
-        <!--Question List View Controller-->
+        <!--Questions-->
         <scene sceneID="df6-FF-m35">
             <objects>
                 <viewController storyboardIdentifier="QuestionListViewController" id="Mvj-PA-sJD" customClass="QuestionListViewController" customModule="blissapp" customModuleProvider="target" sceneMemberID="viewController">
@@ -59,7 +59,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Poi-I8-L8t">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="120" width="375" height="547"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="questionCell" id="Ug8-0W-pFP">
@@ -70,29 +70,75 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="loadingCell" id="46A-cG-Cd4">
+                                        <rect key="frame" x="0.0" y="72" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="46A-cG-Cd4" id="h9X-sA-i9R">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Rph-P6-ozu">
+                                                    <rect key="frame" x="177" y="11" width="20" height="20"/>
+                                                </activityIndicatorView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Rph-P6-ozu" firstAttribute="centerY" secondItem="h9X-sA-i9R" secondAttribute="centerY" id="KgG-sV-Eiw"/>
+                                                <constraint firstItem="Rph-P6-ozu" firstAttribute="centerX" secondItem="h9X-sA-i9R" secondAttribute="centerX" id="SDl-ov-Mfb"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="Mvj-PA-sJD" id="E4X-Oh-Sch"/>
                                     <outlet property="delegate" destination="Mvj-PA-sJD" id="G5Q-93-rAe"/>
                                 </connections>
                             </tableView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="e3Z-Ue-08S">
+                                <rect key="frame" x="0.0" y="64" width="375" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="bbR-Ep-rZe"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="Poi-I8-L8t" firstAttribute="top" secondItem="e3Z-Ue-08S" secondAttribute="bottom" id="5Ug-G3-qzK"/>
+                            <constraint firstItem="e3Z-Ue-08S" firstAttribute="top" secondItem="bd1-E1-31o" secondAttribute="top" id="A4Q-zh-AkD"/>
                             <constraint firstItem="Poi-I8-L8t" firstAttribute="leading" secondItem="bd1-E1-31o" secondAttribute="leading" id="CFR-Kw-Cgq"/>
-                            <constraint firstItem="Poi-I8-L8t" firstAttribute="top" secondItem="bd1-E1-31o" secondAttribute="top" id="WDv-30-evr"/>
                             <constraint firstItem="Poi-I8-L8t" firstAttribute="bottom" secondItem="bd1-E1-31o" secondAttribute="bottom" id="Ym0-vN-B8C"/>
+                            <constraint firstItem="e3Z-Ue-08S" firstAttribute="leading" secondItem="bd1-E1-31o" secondAttribute="leading" id="bjI-DA-F1B"/>
+                            <constraint firstItem="e3Z-Ue-08S" firstAttribute="trailing" secondItem="bd1-E1-31o" secondAttribute="trailing" id="tZj-Py-NS6"/>
                             <constraint firstItem="Poi-I8-L8t" firstAttribute="trailing" secondItem="bd1-E1-31o" secondAttribute="trailing" id="wzv-cb-Kpx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="bd1-E1-31o"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Questions" id="254-qT-ghp"/>
                     <connections>
                         <outlet property="tableView" destination="Poi-I8-L8t" id="dyp-Hz-bBX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Lo-ND-3Mi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1022" y="32"/>
+            <point key="canvasLocation" x="1561" y="32"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="xUP-5b-Rav">
+            <objects>
+                <navigationController storyboardIdentifier="QuestionsNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="Yjn-aJ-npH" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="XGR-ez-3Ge">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Mvj-PA-sJD" kind="relationship" relationship="rootViewController" id="9Ac-m1-GC5"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MpK-NV-j2O" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="841" y="32"/>
         </scene>
     </scenes>
 </document>

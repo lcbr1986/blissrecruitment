@@ -61,7 +61,7 @@ class LoadingViewController: UIViewController {
     
     func presentListViewController() {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let questionListViewController = storyBoard.instantiateViewController(withIdentifier: "QuestionListViewController") as! QuestionListViewController
+        let questionListViewController = storyBoard.instantiateViewController(withIdentifier: "QuestionsNavigationController") as! UINavigationController
         self.present(questionListViewController, animated: true, completion: nil)
 
     }

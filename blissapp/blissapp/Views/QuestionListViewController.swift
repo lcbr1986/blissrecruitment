@@ -29,49 +29,84 @@ class QuestionListViewController: UIViewController {
     func getQuestions() {
         let networkController = NetworkController()
         
-        networkController.getQuestions(limit: 10, offset: currentOffset, filter: "") { (data, error) in
-            guard let data = data else {
-                return
-            }
-            
-            do {
-                if let questions = try JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]] {
-                    for questionDict in questions {
-                        if let question = Question(dictionary: questionDict) {
-                            self.questions.append(question)
+        networkController.getQuestions(limit: 10, offset: currentOffset, filter: filter) { (data, error) in
+            if error != nil {
+                self.showError(error: error)
+            } else {
+                QuestionParser.parseQuestions(questionData: data, completionHandler: { (questions, error) in
+                    if error != nil {
+                        self.showError(error: error)
+                    } else {
+                        guard let questions = questions else {
+                            return
+                        }
+                        self.questions.append(contentsOf: questions)
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
                         }
                     }
-                    
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
-                }
-            }
-            catch {
-                
+                })
             }
         }
     }
     
+    func showError(error: Error?) {
+        var messageToShow:String = ""
+        guard error == nil else {
+            guard let errorMessage = error?.localizedDescription else {
+                messageToShow = "Error Occured"
+                return
+            }
+            messageToShow = errorMessage
+            return
+        }
+        let alertController = UIAlertController(title: "Error", message:
+            messageToShow, preferredStyle: UIAlertControllerStyle.alert)
+        self.present(alertController, animated: true, completion: nil)
+    }
 }
 
 extension QuestionListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return questions.count
+        return questions.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == self.questions.count {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "loadingCell", for: indexPath)
+            return cell
+        }
         let cell = tableView.dequeueReusableCell(withIdentifier: "questionCell", for: indexPath)
         
         let currentQuestion = questions[indexPath.row]
         cell.textLabel?.text = currentQuestion.question
         
+        cell.imageView?.image = nil
+        if let questionImage = imageCache[currentQuestion.thumbUrl] {
+            cell.imageView?.image = questionImage
+        } else {
+            guard let url = URL(string: currentQuestion.thumbUrl) else {
+                return cell
+            }
+            
+            DispatchQueue.global().async {
+                if let data = try? Data(contentsOf: url) {
+                    DispatchQueue.main.async {
+                        let questionImage = UIImage(data: data)
+                        self.imageCache[currentQuestion.thumbUrl] = questionImage
+                        self.tableView.reloadRows(at: [indexPath], with: .none)
+                    }
+                } else {
+                    cell.imageView?.image = nil
+                }
+            }
+        }
         return cell
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == self.questions.count-1 {
+        if indexPath.row == self.questions.count {
             self.currentOffset += questions.count
             getQuestions()
         }

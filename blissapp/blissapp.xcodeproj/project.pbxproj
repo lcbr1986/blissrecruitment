@@ -16,6 +16,7 @@
 		B20E1ED0208364130076322F /* QuestionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20E1ECF208364120076322F /* QuestionListViewController.swift */; };
 		B20E1ED4208367D00076322F /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20E1ED3208367D00076322F /* Question.swift */; };
 		B20E1ED6208367F80076322F /* Choice.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20E1ED5208367F80076322F /* Choice.swift */; };
+		B20E1ED820839F4D0076322F /* QuestionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20E1ED720839F4D0076322F /* QuestionParser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		B20E1ECF208364120076322F /* QuestionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionListViewController.swift; sourceTree = "<group>"; };
 		B20E1ED3208367D00076322F /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		B20E1ED5208367F80076322F /* Choice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Choice.swift; sourceTree = "<group>"; };
+		B20E1ED720839F4D0076322F /* QuestionParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionParser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				B20E1ECD208249280076322F /* NetworkController.swift */,
+				B20E1ED720839F4D0076322F /* QuestionParser.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -175,6 +178,7 @@
 				B20E1ED4208367D00076322F /* Question.swift in Sources */,
 				B20E1ED0208364130076322F /* QuestionListViewController.swift in Sources */,
 				B20E1ECE208249280076322F /* NetworkController.swift in Sources */,
+				B20E1ED820839F4D0076322F /* QuestionParser.swift in Sources */,
 				B20E1EBD2082447B0076322F /* LoadingViewController.swift in Sources */,
 				B20E1EBB2082447B0076322F /* AppDelegate.swift in Sources */,
 			);
