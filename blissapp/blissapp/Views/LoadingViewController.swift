@@ -34,8 +34,7 @@ class LoadingViewController: UIViewController {
                         return
                     }
                     if status == "OK" {
-                        // go to next Screen
-                        print("go to next Screen")
+                        self.presentListViewController()
                     } else {
                         self.showRetry()
                     }
@@ -58,6 +57,13 @@ class LoadingViewController: UIViewController {
         retryButton.isEnabled = false
         activityIndicator.startAnimating()
         getHealth()
+    }
+    
+    func presentListViewController() {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let questionListViewController = storyBoard.instantiateViewController(withIdentifier: "QuestionListViewController") as! QuestionListViewController
+        self.present(questionListViewController, animated: true, completion: nil)
+
     }
     
 }
