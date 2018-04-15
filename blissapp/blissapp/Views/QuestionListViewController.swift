@@ -22,9 +22,13 @@ class QuestionListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        getQuestions()
+        searchBar.text = self.filter
     }
 
+    public func setFilter(filter: String) {
+        self.filter = filter
+    }
+    
     func getQuestions() {
         let networkController = NetworkController()
         
@@ -39,8 +43,8 @@ class QuestionListViewController: UIViewController {
                         guard let questions = questions else {
                             return
                         }
-                        self.questions.append(contentsOf: questions)
                         DispatchQueue.main.async {
+                            self.questions.append(contentsOf: questions)
                             self.tableView.reloadData()
                         }
                     }
