@@ -12,10 +12,28 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    let reachability = Reachability()!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let networkUnavailableViewController = storyBoard.instantiateViewController(withIdentifier: "NetworkUnavailableViewController")
+        
+        reachability.whenReachable = { reachability in
+            networkUnavailableViewController.dismiss(animated: true, completion: nil)
+        }
+        reachability.whenUnreachable = { _ in
+            
+            if let topController = UIApplication.topViewController() {
+                topController.present(networkUnavailableViewController, animated: true, completion: nil)
+            }
+        }
+        
+        do {
+            try reachability.startNotifier()
+        } catch {
+            print("Unable to start notifier")
+        }
         return true
     }
 

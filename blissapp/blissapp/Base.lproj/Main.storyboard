@@ -496,6 +496,36 @@
             </objects>
             <point key="canvasLocation" x="3269.5999999999999" y="31.934032983508249"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="fST-fU-Ntw">
+            <objects>
+                <viewController storyboardIdentifier="NetworkUnavailableViewController" id="eBZ-lW-yrN" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tBp-X4-es2">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Network is unavailable" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mis-x1-jIS">
+                                <rect key="frame" x="102" y="323" width="171" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="pCi-da-Len"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Mis-x1-jIS" firstAttribute="centerX" secondItem="tBp-X4-es2" secondAttribute="centerX" id="0sm-TY-nAi"/>
+                            <constraint firstItem="Mis-x1-jIS" firstAttribute="centerY" secondItem="tBp-X4-es2" secondAttribute="centerY" id="5qU-Ka-td4"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="4DD-2a-eW2"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yqu-eZ-q1Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4111" y="32"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="xUP-5b-Rav">
             <objects>
