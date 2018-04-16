@@ -14,7 +14,7 @@ struct Question {
     let imageUrl: String
     let thumbUrl: String
     let publishedAt: Date
-    let choices: [Choice]
+    var choices: [Choice]
     
     init?(dictionary: [String: Any]) {
         guard let id = dictionary["id"] as? Int,

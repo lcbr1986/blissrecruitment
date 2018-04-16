@@ -16,6 +16,8 @@ class QuestionListViewController: UIViewController {
     
     var filter = ""
     
+    var questionIdToSegueTo: String?
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -82,6 +84,10 @@ class QuestionListViewController: UIViewController {
             }
             let questionDetailViewController = segue.destination as! QuestionDetailViewController
             questionDetailViewController.question = selectedQuestion
+        }
+        if segue.identifier == "questionIdDetailSegue" {
+            let questionDetailViewController = segue.destination as! QuestionDetailViewController
+            questionDetailViewController.questionId = self.questionIdToSegueTo
         }
     }
 }

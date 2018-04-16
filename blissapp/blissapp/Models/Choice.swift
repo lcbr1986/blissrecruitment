@@ -8,7 +8,7 @@
 
 struct Choice {
     let choice: String
-    let votes: Int
+    var votes: Int
     
     init?(dictionary: [String: Any]) {
         guard let choice = dictionary["choice"] as? String,

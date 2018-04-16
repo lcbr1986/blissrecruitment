@@ -28,6 +28,12 @@ class NetworkController {
         createRequest(urlString: endpoint, completionHandler: completionHandler)
     }
     
+    public func getQuestion(id: String, completionHandler: @escaping (Data?, Error?) -> Void) {
+        let endpoint = "https://private-anon-27236c9e20-blissrecruitmentapi.apiary-mock.com/questions/\(id)"
+        
+        createRequest(urlString: endpoint, completionHandler: completionHandler)
+    }
+    
     private func createRequest(urlString: String, completionHandler: @escaping (Data?, Error?) -> Void) {
         guard let url = URL(string: urlString) else {
             let error = BackendError.urlError(reason: "Could not construct URL")

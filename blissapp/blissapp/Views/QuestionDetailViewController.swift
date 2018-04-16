@@ -11,6 +11,7 @@ import UIKit
 class QuestionDetailViewController: UIViewController {
 
     var question: Question?
+    var questionId: String?
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var createdAtLabel: UILabel!
@@ -29,6 +30,9 @@ class QuestionDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if let questionId = self.questionId {
+            getQuestion(questionId: questionId)
+        }
         guard let question = self.question else {
             return
         }
@@ -58,15 +62,40 @@ class QuestionDetailViewController: UIViewController {
         choice4VotesLabel.text = "Votes: \(question.choices[3].votes)"
     }
 
-    @IBAction func voteChoice1Action(_ sender: Any) {
+    @IBAction func voteChoiceAction(_ sender: Any) {
+        setVotedButton(sender)
     }
-
-    @IBAction func voteChoice2Action(_ sender: Any) {
+    
+    func setVotedButton(_ sender: Any) {
+        let button = sender as! UIButton
+        self.question?.choices[button.tag].votes += 1
+        button.setTitle("Voted", for: .normal)
+        for voteButton in voteButtons {
+            voteButton.isEnabled = false
+        }
+        setUIElements(question: self.question!)
     }
-
-    @IBAction func voteChoice3Action(_ sender: Any) {
-    }
-
-    @IBAction func voteChoice4Action(_ sender: Any) {
+    
+    func getQuestion(questionId: String) {
+        let networkController = NetworkController()
+        
+        networkController.getQuestion(id: questionId) { (data, error) in
+            if error != nil {
+                // Show Error
+            }
+            QuestionParser.parseQuestion(questionData: data, completionHandler: { (question, error) in
+                if error != nil {
+                    // Show Error
+                } else {
+                    guard let question = question else {
+                        return
+                    }
+                    self.question = question
+                    DispatchQueue.main.async {
+                        self.setUIElements(question: question)
+                    }
+                }
+            })
+        }
     }
 }

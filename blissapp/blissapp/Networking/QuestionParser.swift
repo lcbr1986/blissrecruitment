@@ -42,4 +42,28 @@ struct QuestionParser {
             completionHandler(nil, error)
         }
     }
+    
+    static func parseQuestion(questionData: Data?, completionHandler: @escaping (Question?, Error?) -> Void) {
+        guard let data = questionData else {
+            let error = ParsingError.parsingError(reason: "No data")
+            completionHandler(nil, error)
+            return
+        }
+        
+        do {
+            if let questionDict = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                if let question = Question(dictionary: questionDict) {
+                    completionHandler(question, nil)
+                }
+                
+            } else {
+                let error = ParsingError.parsingError(reason: "Could not parse JSON")
+                completionHandler(nil, error)
+            }
+        }
+        catch {
+            let error = ParsingError.jsonSerialization(reason: "Could not serialize JSON")
+            completionHandler(nil, error)
+        }
+    }
 }
