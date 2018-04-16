@@ -88,7 +88,6 @@ class QuestionDetailViewController: UIViewController {
     }
     
     func getQuestion(questionId: String) {
-        
         networkController.getQuestion(id: questionId) { (data, error) in
             self.parseQuestionData(data: data, error: error)
         }
