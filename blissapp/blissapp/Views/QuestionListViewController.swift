@@ -73,12 +73,27 @@ class QuestionListViewController: UIViewController {
             messageToShow, preferredStyle: UIAlertControllerStyle.alert)
         self.present(alertController, animated: true, completion: nil)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "questionDetailSegue" {
+            guard let indexPath = self.tableView.indexPathForSelectedRow,
+            let selectedQuestion = questions[indexPath.row] as Question? else {
+                return
+            }
+            let questionDetailViewController = segue.destination as! QuestionDetailViewController
+            questionDetailViewController.question = selectedQuestion
+        }
+    }
 }
 
 extension QuestionListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return questions.count + 1
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 44
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
