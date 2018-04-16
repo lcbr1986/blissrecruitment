@@ -23,7 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             networkUnavailableViewController.dismiss(animated: true, completion: nil)
         }
         reachability.whenUnreachable = { _ in
-            
             if let topController = UIApplication.topViewController() {
                 topController.present(networkUnavailableViewController, animated: true, completion: nil)
             }

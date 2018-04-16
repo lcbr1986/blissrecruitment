@@ -6,7 +6,7 @@
 //  Copyright © 2018 Luis. All rights reserved.
 //
 
-struct Choice {
+struct Choice: Encodable {
     let choice: String
     var votes: Int
     

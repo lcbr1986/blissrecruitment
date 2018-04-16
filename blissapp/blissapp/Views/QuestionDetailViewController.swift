@@ -26,6 +26,7 @@ class QuestionDetailViewController: UIViewController {
     @IBOutlet weak var choice4VotesLabel: UILabel!
     @IBOutlet var voteButtons: [UIButton]!
     
+    let networkController = NetworkController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,35 +69,48 @@ class QuestionDetailViewController: UIViewController {
     
     func setVotedButton(_ sender: Any) {
         let button = sender as! UIButton
-        self.question?.choices[button.tag].votes += 1
+        guard var question = self.question else {
+            return
+        }
+        question.choices[button.tag].votes += 1
         button.setTitle("Voted", for: .normal)
         for voteButton in voteButtons {
             voteButton.isEnabled = false
         }
-        setUIElements(question: self.question!)
+        
+        let encodedData = try? JSONEncoder().encode(question)
+        
+        if let data = encodedData {
+            networkController.updateQuestion(questionId: question.id, body: data) { (data, error) in
+                self.parseQuestionData(data: data, error: error)
+            }
+        }
     }
     
     func getQuestion(questionId: String) {
-        let networkController = NetworkController()
         
         networkController.getQuestion(id: questionId) { (data, error) in
+            self.parseQuestionData(data: data, error: error)
+        }
+    }
+    
+    func parseQuestionData(data: Data?, error: Error?) {
+        if error != nil {
+            // Show Error
+        }
+        QuestionParser.parseQuestion(questionData: data, completionHandler: { (question, error) in
             if error != nil {
                 // Show Error
-            }
-            QuestionParser.parseQuestion(questionData: data, completionHandler: { (question, error) in
-                if error != nil {
-                    // Show Error
-                } else {
-                    guard let question = question else {
-                        return
-                    }
-                    self.question = question
-                    DispatchQueue.main.async {
-                        self.setUIElements(question: question)
-                    }
+            } else {
+                guard let question = question else {
+                    return
                 }
-            })
-        }
+                self.question = question
+                DispatchQueue.main.async {
+                    self.setUIElements(question: question)
+                }
+            }
+        })
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

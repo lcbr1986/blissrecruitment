@@ -8,7 +8,15 @@
 
 import Foundation
 
-struct Question {
+enum CodingKeys: String, CodingKey {
+    case id
+    case question
+    case imageUrl = "image_url"
+    case thumbUrl = "thumb_url"
+    case choices
+}
+
+struct Question: Encodable {
     let id: Int
     let question: String
     let imageUrl: String
@@ -42,5 +50,14 @@ struct Question {
             }
         }
         self.choices = choices
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(question, forKey: .question)
+        try container.encode(id, forKey: .id)
+        try container.encode(imageUrl, forKey: .imageUrl)
+        try container.encode(thumbUrl, forKey: .thumbUrl)
+        try container.encode(choices, forKey: .choices)
     }
 }
