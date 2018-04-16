@@ -34,13 +34,21 @@ class NetworkController {
         createRequest(urlString: endpoint, completionHandler: completionHandler)
     }
     
-    private func createRequest(urlString: String, completionHandler: @escaping (Data?, Error?) -> Void) {
+    public func shareQuestion(destinationEmail: String, questionId: String, completionHandler: @escaping (Data?, Error?) -> Void) {
+        let baseUrl = "https://private-anon-27236c9e20-blissrecruitmentapi.apiary-mock.com/share"
+        let endpoint = "\(baseUrl)?destination_email=\(destinationEmail)&content_url=blissrecruitment://questions?question_id=\(questionId)"
+        
+        createRequest(urlString: endpoint, method: "POST", completionHandler: completionHandler)
+    }
+    
+    private func createRequest(urlString: String, method: String = "GET", completionHandler: @escaping (Data?, Error?) -> Void) {
         guard let url = URL(string: urlString) else {
             let error = BackendError.urlError(reason: "Could not construct URL")
             completionHandler(nil, error)
             return
         }
-        let urlRequest = URLRequest(url: url)
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = method
         
         let session = URLSession.shared
         let task = session.dataTask(with: urlRequest, completionHandler: {

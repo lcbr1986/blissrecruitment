@@ -384,9 +384,22 @@
                                     <constraint firstAttribute="trailing" secondItem="uYR-cQ-h6m" secondAttribute="trailing" id="wQJ-ji-CXz"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nxU-mV-dHY">
+                                <rect key="frame" x="167" y="474" width="40" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="OMJ-LI-d7A"/>
+                                </constraints>
+                                <state key="normal" title="Share"/>
+                                <connections>
+                                    <segue destination="Hw1-7M-bg3" kind="popoverPresentation" identifier="shareSegue" popoverAnchorView="nxU-mV-dHY" id="AFv-OP-F1g">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="nxU-mV-dHY" firstAttribute="top" secondItem="2Be-4H-t49" secondAttribute="bottom" constant="8" id="11B-dm-mfe"/>
                             <constraint firstItem="A0X-h2-W1T" firstAttribute="leading" secondItem="glP-P0-6hu" secondAttribute="leading" constant="16" id="8XY-yE-bqI"/>
                             <constraint firstItem="A0X-h2-W1T" firstAttribute="top" secondItem="glP-P0-6hu" secondAttribute="top" constant="8" id="Czp-R8-0rl"/>
                             <constraint firstItem="TpL-Ig-XMF" firstAttribute="top" secondItem="A0X-h2-W1T" secondAttribute="bottom" constant="8" id="MLa-wo-0Xa"/>
@@ -394,6 +407,7 @@
                             <constraint firstItem="TpL-Ig-XMF" firstAttribute="leading" secondItem="glP-P0-6hu" secondAttribute="leading" constant="16" id="QVJ-c2-EER"/>
                             <constraint firstItem="xS5-zB-D6m" firstAttribute="centerX" secondItem="OZU-v1-fYs" secondAttribute="centerX" id="SKg-lg-Gst"/>
                             <constraint firstItem="glP-P0-6hu" firstAttribute="trailing" secondItem="2Be-4H-t49" secondAttribute="trailing" constant="16" id="Szn-2V-QJt"/>
+                            <constraint firstItem="nxU-mV-dHY" firstAttribute="centerX" secondItem="OZU-v1-fYs" secondAttribute="centerX" id="WfK-3r-E24"/>
                             <constraint firstItem="glP-P0-6hu" firstAttribute="trailing" secondItem="TpL-Ig-XMF" secondAttribute="trailing" constant="16" id="f91-OU-79R"/>
                             <constraint firstItem="2Be-4H-t49" firstAttribute="leading" secondItem="glP-P0-6hu" secondAttribute="leading" constant="16" id="q0r-DM-JDR"/>
                             <constraint firstItem="2Be-4H-t49" firstAttribute="top" secondItem="xS5-zB-D6m" secondAttribute="bottom" constant="8" id="vsG-gX-uFz"/>
@@ -422,6 +436,65 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sXz-pM-XRx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2357.5999999999999" y="31.934032983508249"/>
+        </scene>
+        <!--Share Question View Controller-->
+        <scene sceneID="rgC-YI-OtY">
+            <objects>
+                <viewController storyboardIdentifier="ShareQuestionViewController" id="Hw1-7M-bg3" customClass="ShareQuestionViewController" customModule="blissapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZqR-Od-jCZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dsa-LM-AOl">
+                                <rect key="frame" x="15" y="20" width="48" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="NLY-Bc-xt5"/>
+                                </constraints>
+                                <state key="normal" title="Cancel"/>
+                                <connections>
+                                    <action selector="cancelAction:" destination="Hw1-7M-bg3" eventType="touchUpInside" id="ezA-Rb-iDf"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="e3o-cS-z1h">
+                                <rect key="frame" x="16" y="58" width="343" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="nEq-Xl-pvF"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" textContentType="email"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="unF-dW-kr2">
+                                <rect key="frame" x="167" y="96" width="40" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="EI9-cd-58h"/>
+                                </constraints>
+                                <state key="normal" title="Share"/>
+                                <connections>
+                                    <action selector="shareAction:" destination="Hw1-7M-bg3" eventType="touchUpInside" id="OX4-qq-NcI"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="dsa-LM-AOl" firstAttribute="top" secondItem="jTC-kc-Kcj" secondAttribute="top" id="BN3-sk-cv1"/>
+                            <constraint firstItem="dsa-LM-AOl" firstAttribute="leading" secondItem="jTC-kc-Kcj" secondAttribute="leading" constant="15" id="I0l-T3-N5U"/>
+                            <constraint firstItem="unF-dW-kr2" firstAttribute="top" secondItem="e3o-cS-z1h" secondAttribute="bottom" constant="8" id="LiH-NA-4UB"/>
+                            <constraint firstItem="e3o-cS-z1h" firstAttribute="leading" secondItem="jTC-kc-Kcj" secondAttribute="leading" constant="16" id="YFv-ca-aBv"/>
+                            <constraint firstItem="jTC-kc-Kcj" firstAttribute="trailing" secondItem="e3o-cS-z1h" secondAttribute="trailing" constant="16" id="fej-4X-IY0"/>
+                            <constraint firstItem="e3o-cS-z1h" firstAttribute="top" secondItem="dsa-LM-AOl" secondAttribute="bottom" constant="8" id="gs5-Wd-vFB"/>
+                            <constraint firstItem="unF-dW-kr2" firstAttribute="centerX" secondItem="ZqR-Od-jCZ" secondAttribute="centerX" id="jT5-Ua-eJv"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dsa-LM-AOl" secondAttribute="trailing" constant="20" symbolic="YES" id="uL5-MK-yNf"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="jTC-kc-Kcj"/>
+                    </view>
+                    <connections>
+                        <outlet property="emailTextField" destination="e3o-cS-z1h" id="qZp-So-NKM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g1H-br-Q8y" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3269.5999999999999" y="31.934032983508249"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="xUP-5b-Rav">

@@ -98,4 +98,11 @@ class QuestionDetailViewController: UIViewController {
             })
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "shareSegue" {
+            let shareQuestionViewController = segue.destination as! ShareQuestionViewController
+            shareQuestionViewController.questionId = String(describing: self.question?.id)
+        }
+    }
 }
