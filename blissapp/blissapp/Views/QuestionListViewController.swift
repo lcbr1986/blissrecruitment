@@ -72,7 +72,7 @@ class QuestionListViewController: UIViewController {
             return
         }
         let alertController = UIAlertController(title: "Error", message:
-            messageToShow, preferredStyle: UIAlertControllerStyle.alert)
+            messageToShow, preferredStyle: UIAlertController.Style.alert)
         self.present(alertController, animated: true, completion: nil)
     }
     
