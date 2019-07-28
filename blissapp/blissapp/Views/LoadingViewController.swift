@@ -47,9 +47,11 @@ class LoadingViewController: UIViewController {
     }
     
     func showRetry() {
-        retryButton.setTitle("Retry", for: .normal)
-        retryButton.isEnabled = true
-        activityIndicator.stopAnimating()
+        DispatchQueue.main.async {
+            self.retryButton.setTitle("Retry", for: .normal)
+            self.retryButton.isEnabled = true
+            self.activityIndicator.stopAnimating()
+        }
     }
     
     @IBAction func retryAction(_ sender: Any) {
