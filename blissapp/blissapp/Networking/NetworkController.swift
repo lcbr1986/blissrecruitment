@@ -15,34 +15,35 @@ enum BackendError: Error {
 
 class NetworkController {
 
+    let baseUrl = "https://private-anon-6a87a4a71d-blissrecruitmentapi.apiary-mock.com"
     public func getHealth(completionHandler: @escaping (Data?, Error?) -> Void) {
-        let endpoint = "https://private-anon-27236c9e20-blissrecruitmentapi.apiary-mock.com/health"
+        let endpoint = "\(baseUrl)/health"
         
         createRequest(urlString: endpoint, completionHandler: completionHandler)
     }
     
     public func getQuestions(limit: Int, offset: Int, filter: String, completionHandler: @escaping (Data?, Error?) -> Void) {
-        let baseUrl = "https://private-anon-27236c9e20-blissrecruitmentapi.apiary-mock.com/questions"
-        let endpoint = "\(baseUrl)?limit=\(limit)&offset=\(offset)&filter=\(filter)"
+        let url = "\(baseUrl)/questions"
+        let endpoint = "\(url)?limit=\(limit)&offset=\(offset)&filter=\(filter)"
         
         createRequest(urlString: endpoint, completionHandler: completionHandler)
     }
     
     public func getQuestion(id: String, completionHandler: @escaping (Data?, Error?) -> Void) {
-        let endpoint = "https://private-anon-27236c9e20-blissrecruitmentapi.apiary-mock.com/questions/\(id)"
+        let endpoint = "\(baseUrl)/questions/\(id)"
         
         createRequest(urlString: endpoint, completionHandler: completionHandler)
     }
     
     public func shareQuestion(destinationEmail: String, questionId: String, completionHandler: @escaping (Data?, Error?) -> Void) {
-        let baseUrl = "https://private-anon-27236c9e20-blissrecruitmentapi.apiary-mock.com/share"
-        let endpoint = "\(baseUrl)?destination_email=\(destinationEmail)&content_url=blissrecruitment://questions?question_id=\(questionId)"
+        let url = "\(baseUrl)/share"
+        let endpoint = "\(url)?destination_email=\(destinationEmail)&content_url=blissrecruitment://questions?question_id=\(questionId)"
         
         createRequest(urlString: endpoint, method: "POST", completionHandler: completionHandler)
     }
     
     public func updateQuestion(questionId: Int, body: Data, completionHandler: @escaping (Data?, Error?) -> Void) {
-        let endpoint = "https://private-anon-27236c9e20-blissrecruitmentapi.apiary-mock.com/questions/\(questionId)"
+        let endpoint = "\(baseUrl)/questions/\(questionId)"
         
         createRequest(urlString: endpoint, method: "PUT", body: body, completionHandler: completionHandler)
     }
