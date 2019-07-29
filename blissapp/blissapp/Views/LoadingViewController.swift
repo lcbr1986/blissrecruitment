@@ -55,16 +55,20 @@ class LoadingViewController: UIViewController {
     }
     
     @IBAction func retryAction(_ sender: Any) {
-        retryButton.setTitle("Loading", for: .normal)
-        retryButton.isEnabled = false
-        activityIndicator.startAnimating()
+        DispatchQueue.main.async {
+            self.retryButton.setTitle("Loading", for: .normal)
+            self.retryButton.isEnabled = false
+            self.activityIndicator.startAnimating()
+        }
         getHealth()
     }
     
     func presentListViewController() {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let questionListViewController = storyBoard.instantiateViewController(withIdentifier: "QuestionsNavigationController") as! UINavigationController
-        self.present(questionListViewController, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            self.present(questionListViewController, animated: true, completion: nil)
+        }
 
     }
     

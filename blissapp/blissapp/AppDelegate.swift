@@ -22,12 +22,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         networkUnavailableViewController = storyBoard.instantiateViewController(withIdentifier: "NetworkUnavailableViewController")
         
         reachability.whenReachable = { _ in
-            self.networkUnavailableViewController?.dismiss(animated: true, completion: nil)
+            DispatchQueue.main.async {
+                self.networkUnavailableViewController?.dismiss(animated: true, completion: nil)
+            }
         }
         reachability.whenUnreachable = { _ in
             if let topController = UIApplication.topViewController() {
                 guard let viewController = self.networkUnavailableViewController else { return }
-                topController.present(viewController, animated: true, completion: nil)
+                DispatchQueue.main.async {
+                    topController.present(viewController, animated: true, completion: nil)
+                }
             }
         }
         
