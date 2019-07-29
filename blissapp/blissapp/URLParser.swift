@@ -8,7 +8,9 @@
 
 import UIKit
 
+
 struct URLParser {
+    static let detailSegue = "questionIdDetailSegue"
     static func parseUrl(url: URL) -> Bool {
         guard let components = URLComponents(url: url, resolvingAgainstBaseURL: true), let host = components.host else {
             return false
@@ -16,7 +18,6 @@ struct URLParser {
         
         if host == "questions" {
             let queryItem = components.queryItems?[0]
-            
             
             if queryItem?.name == "question_filter",
                 let filterValue = queryItem?.value {
@@ -26,11 +27,9 @@ struct URLParser {
                             questionsListViewController.setFilter(filter: filterValue)
                         }
                     } else {
-                        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                        let questionListViewController = storyBoard.instantiateViewController(withIdentifier: "QuestionListViewController") as! QuestionListViewController
+                        let questionListViewController = URLParser.getQuestionsViewController()
                         questionListViewController.setFilter(filter: filterValue)
-                        let navigationViewController = UINavigationController(rootViewController: questionListViewController)
-                        topController.present(navigationViewController, animated: true) {}
+                        URLParser.presentViewController(viewController: questionListViewController, topController: topController)
                     }
                 }
             } else if queryItem?.name == "question_id",
@@ -39,20 +38,32 @@ struct URLParser {
                     if topController is QuestionListViewController {
                         if let questionListViewController = topController as? QuestionListViewController {
                             questionListViewController.questionIdToSegueTo = questionId
-                            questionListViewController.performSegue(withIdentifier: "questionIdDetailSegue", sender: nil)
+                            questionListViewController.performSegue(withIdentifier: detailSegue, sender: nil)
                         }
                     } else {
-                        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                        let questionListViewController = storyBoard.instantiateViewController(withIdentifier: "QuestionListViewController") as! QuestionListViewController
+                        let questionListViewController = URLParser.getQuestionsViewController()
                         questionListViewController.questionIdToSegueTo = questionId
-                        let navigationViewController = UINavigationController(rootViewController: questionListViewController)
-                        topController.present(navigationViewController, animated: true) {
-                            questionListViewController.performSegue(withIdentifier: "questionIdDetailSegue", sender: nil)
+                        URLParser.presentViewController(viewController: questionListViewController, topController: topController) {
+                            questionListViewController.performSegue(withIdentifier: detailSegue, sender: nil)
                         }
                     }
                 }
             }
         }
         return false
+    }
+    
+    static func getQuestionsViewController() -> QuestionListViewController {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        return storyBoard.instantiateViewController(withIdentifier: "QuestionListViewController") as! QuestionListViewController
+    }
+    
+    static func presentViewController(viewController: UIViewController, topController: UIViewController, closure: () -> Void = { }) {
+        let navigationViewController = UINavigationController(rootViewController: viewController)
+        DispatchQueue.main.async {
+            topController.present(navigationViewController, animated: true) {
+                viewController.performSegue(withIdentifier: detailSegue, sender: nil)
+            }
+        }
     }
 }
