@@ -29,6 +29,7 @@ class QuestionListViewController: UIViewController {
 
     public func setFilter(filter: String) {
         self.filter = filter
+        self.searchBar.text = filter
     }
     
     func getQuestions() {
