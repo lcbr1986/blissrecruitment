@@ -15,7 +15,6 @@ class ShareQuestionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
 
     @IBAction func cancelAction(_ sender: Any) {

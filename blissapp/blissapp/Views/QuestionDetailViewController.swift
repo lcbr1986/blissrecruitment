@@ -95,11 +95,11 @@ class QuestionDetailViewController: UIViewController {
     
     func parseQuestionData(data: Data?, error: Error?) {
         if error != nil {
-            // Show Error
+            self.showError(error: error)
         }
         QuestionParser.parseQuestion(questionData: data, completionHandler: { (question, error) in
             if error != nil {
-                // Show Error
+                self.showError(error: error)
             } else {
                 guard let question = question else {
                     return

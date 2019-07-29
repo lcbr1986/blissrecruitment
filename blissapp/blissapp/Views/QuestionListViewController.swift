@@ -46,8 +46,8 @@ class QuestionListViewController: UIViewController {
                         guard let questions = questions else {
                             return
                         }
+                        self.questions.append(contentsOf: questions)
                         DispatchQueue.main.async {
-                            self.questions.append(contentsOf: questions)
                             self.tableView.reloadData()
                         }
                     }
@@ -60,21 +60,6 @@ class QuestionListViewController: UIViewController {
         currentOffset = 0
         questions = [Question]()
         filter = ""
-    }
-    
-    func showError(error: Error?) {
-        var messageToShow:String = ""
-        guard error == nil else {
-            guard let errorMessage = error?.localizedDescription else {
-                messageToShow = "Error Occured"
-                return
-            }
-            messageToShow = errorMessage
-            return
-        }
-        let alertController = UIAlertController(title: "Error", message:
-            messageToShow, preferredStyle: UIAlertController.Style.alert)
-        self.present(alertController, animated: true, completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

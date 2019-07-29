@@ -24,3 +24,20 @@ extension UIApplication {
         return controller
     }
 }
+
+extension UIViewController {
+    func showError(error: Error?) {
+        var messageToShow:String = ""
+        guard error == nil else {
+            guard let errorMessage = error?.localizedDescription else {
+                messageToShow = "Error Occured"
+                return
+            }
+            messageToShow = errorMessage
+            return
+        }
+        let alertController = UIAlertController(title: "Error", message:
+            messageToShow, preferredStyle: UIAlertController.Style.alert)
+        self.present(alertController, animated: true, completion: nil)
+    }
+}
