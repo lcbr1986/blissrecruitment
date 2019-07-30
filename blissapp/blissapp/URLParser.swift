@@ -58,11 +58,11 @@ struct URLParser {
         return storyBoard.instantiateViewController(withIdentifier: "QuestionListViewController") as! QuestionListViewController
     }
     
-    static func presentViewController(viewController: UIViewController, topController: UIViewController, closure: () -> Void = { }) {
+    static func presentViewController(viewController: UIViewController, topController: UIViewController, closure: @escaping () -> Void = { }) {
         let navigationViewController = UINavigationController(rootViewController: viewController)
         DispatchQueue.main.async {
             topController.present(navigationViewController, animated: true) {
-                viewController.performSegue(withIdentifier: detailSegue, sender: nil)
+                closure()
             }
         }
     }
